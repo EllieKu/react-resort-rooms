@@ -30,6 +30,7 @@ class RoomProvider extends Component {
       featuredRooms,
       sortedRooms: rooms,
       loading: false,
+      price: maxPrice,
       maxPrice,
       maxSize,
     })
@@ -55,7 +56,6 @@ class RoomProvider extends Component {
   handleChange = event => {
     const {type, name} = event.target
     const value = type === 'checkbox' ? event.target.checked : event.target.value 
-    console.log(type, name, value)
     this.setState(
       {
       [name]: value
@@ -65,7 +65,39 @@ class RoomProvider extends Component {
   }
 
   filterRooms = () => {
-    console.log('filterRooms')
+    let {
+      rooms,
+      type,
+      capacity,
+      price,
+      minPrice,
+      maxPrice,
+      minSize,
+      maxSize,
+      breakfast,
+      pets,
+    } = this.state
+
+    let tempRooms = [...rooms]
+    capacity = parseInt(capacity)
+    price = parseInt(price)
+    if (type !== 'all') {
+      tempRooms = tempRooms.filter(room => room.type === type)
+    }
+    if (capacity !== 1) {
+      tempRooms = tempRooms.filter(room => room.capacity >= capacity)
+    }
+    tempRooms = tempRooms.filter(room => room.price <= price)
+    tempRooms = tempRooms.filter(room => room.size >= minSize && room.size <= maxSize)
+    if (breakfast) {
+      tempRooms = tempRooms.filter(room => room.breakfast)
+    }
+    if (pets) {
+      tempRooms = tempRooms.filter(room => room.pets)
+    }
+    this.setState({
+      sortedRooms: tempRooms
+    })
   }
 
   render() {
@@ -86,7 +118,6 @@ const RoomConsumer = RoomContext.Consumer
 
 export function withRoomConsumer(Component) {
   return function ConsumerWrapper(props) {
-    console.log(props)
     return <RoomConsumer>
       { value => <Component {...props} context={value} /> }
     </RoomConsumer>

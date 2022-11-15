@@ -37,7 +37,7 @@ export default function SingleRoom() {
   return (
     <>
       <StyledHero img={mainIng || defaultImg}>
-        <Banner title={`${name}`}>s
+        <Banner title={`${name}`}>
           <Link to='/rooms' className='btn-primary'>
             back to rooms
           </Link>

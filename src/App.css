@@ -369,10 +369,18 @@ h6 {
   width: 80vw;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-row-gap: 2rem;
   grid-column-gap: 50px;
 }
+
+@media screen and (max-width: 375px) {
+  .single-room-images {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+}
+
 .single-room-images img {
   width: 100%;
   display: block;
@@ -413,10 +421,6 @@ h6 {
 }
 .extras {
   list-style-type: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-  grid-column-gap: 2rem;
-  grid-row-gap: 1rem;
 }
 @media screen and (min-width: 992px) {
   .single-room-images,

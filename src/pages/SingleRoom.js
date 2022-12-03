@@ -6,6 +6,9 @@ import StyledHero from '../components/StyledHero'
 import defaultImg from '../images/room-1.jpeg'
 
 export default function SingleRoom() {
+  window.scrollTo({
+    top: 0,
+  })
   const params = useParams()
   const context = useContext(RoomContext)
   const { getRoom } = context
@@ -69,7 +72,9 @@ export default function SingleRoom() {
         </div>
       </section>
       <section className='room-extras'>
-        <h6>extras</h6>
+        <article className='desc'>
+          <h3>Extras</h3>
+        </article>
         <ul className='extras'>
           {extras.map((item, index) => {
             return <li key={index}>- {item}</li>

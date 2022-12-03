@@ -24,10 +24,6 @@ class RoomProvider extends Component {
     this.requestRooms()
   }
 
-  componentDidUpdate() {
-    console.log('componentDidUpdate')
-  }
-
   requestRooms() {
     axios({
       method: 'post',

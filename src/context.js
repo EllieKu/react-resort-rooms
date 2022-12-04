@@ -25,20 +25,9 @@ class RoomProvider extends Component {
   }
 
   requestRooms() {
-    axios({
-      method: 'post',
-      url: '/app/data-ewlkc/endpoint/data/v1/action/find',
-      headers: {
-        'api-key': 'wkvgy83SQnNYUeqOds9Z7jJ3W2BOvrmIDCH9PzRjzbaPLcPfmkSqihDen34Gdfxd',
-      },
-      data: {
-        "collection":"rooms",
-        "database":"dev",
-        "dataSource":"Cluster0",
-      }
-    })
+    axios.get('/.netlify/functions/rooms')
       .then(response => {
-        let rooms = this.formatData(response.data.documents)
+        let rooms = this.formatData(response.data.data)
         let featuredRooms = rooms.filter(room => room.featured === true)
         let maxPrice = Math.max(...rooms.map(item => item.price))
         let maxSize = Math.max(...rooms.map(item => item.size))

@@ -6,6 +6,10 @@ import FeaturedRooms from '../components/FeaturedRooms'
 import { Link } from 'react-router-dom'
 
 export default function Home() {
+  window.scrollTo({
+    top: 0,
+  })
+
   return (
     <>
       <Hero>

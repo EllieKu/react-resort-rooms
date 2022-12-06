@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom'
 import RoomContainer from '../components/RoomContainer'
 
 const Rooms = () => {
+  window.scrollTo({
+    top: 0,
+  })
+
   return (
     <>
       <Hero hero="roomsHero">

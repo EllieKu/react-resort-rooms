@@ -1,10 +1,21 @@
 # React rooms resort demo
 
-[Live Demo](https://react-rooms-resort-demo.netlify.app/)
+built with React, using Netlify functions as API.
+visit: https://react-rooms-resort-demo.netlify.app
 
-- React
-- React-Router
-- Styled-Component
-- Netlify
+***
 
-Source: [john-smilga/react-beach-resort-project](https://github.com/john-smilga/react-beach-resort-project)
+### Installation
+
+    npm install
+
+***
+
+### Available Scripts
+
+    npm run dev
+Runs the app in the development mode
+Open http://localhost:8888
+
+    npm run built
+Builds the app for production to the build folder

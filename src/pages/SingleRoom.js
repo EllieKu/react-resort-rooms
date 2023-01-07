@@ -59,15 +59,24 @@ export default function SingleRoom() {
           </article>
           <article className='info'>
             <h3>info</h3>
-            <h6>price: ${price}</h6>
-            <h6>size: ${size} SQFT</h6>
             <h6>
-              max capacity: {
-                capacity > 1 ? `${capacity} people` : `${capacity} person`
-              }
+              <span>price:</span> 
+              <span> ${price}</span>
             </h6>
-            <h6>{ pets ? "pets allowed" : "no pets allowed" }</h6>
-            <h6>{ breakfast && "free breakfast included" }</h6>
+            <h6>
+              <span>size:</span> 
+              <span> ${size} SQFT</span>
+            </h6>
+            <h6>
+              <span>max capacity:</span> 
+              <span>{capacity > 1 ? ` ${capacity} people` : ` ${capacity} person`}</span>
+            </h6>
+            <h6>
+              <span>{ pets ? "pets allowed" : "no pets allowed" }</span> 
+            </h6>
+            <h6>
+              <span>{ breakfast && "free breakfast included" }</span> 
+            </h6>
           </article>
         </div>
       </section>

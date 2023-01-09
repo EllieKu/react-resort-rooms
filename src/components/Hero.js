@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Hero({children, hero}) {
+export default function Hero({children, hero}) {
   return (
     <header className={hero}>
       {children}
@@ -11,5 +11,3 @@ function Hero({children, hero}) {
 Hero.defaultProps = {
   hero: 'defaultHero'
 } 
-
-export default Hero

@@ -3,7 +3,7 @@ import logo from '../images/logo.svg'
 import { FaAlignRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-class Navbar extends Component {
+export default class Navbar extends Component {
   state = {
     isOpen: false,
   }
@@ -41,5 +41,3 @@ class Navbar extends Component {
     ) 
   }
 }
-
-export default Navbar

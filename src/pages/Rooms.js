@@ -4,7 +4,7 @@ import Banner from '../components/Banner'
 import { Link } from 'react-router-dom'
 import RoomContainer from '../components/RoomContainer'
 
-const Rooms = () => {
+export default function Rooms() {
   window.scrollTo({
     top: 0,
   })
@@ -22,5 +22,3 @@ const Rooms = () => {
     </>
   )
 }
-
-export default Rooms

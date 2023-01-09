@@ -3,7 +3,7 @@ import Hero from '../components/Hero'
 import Banner from '../components/Banner'
 import { Link } from 'react-router-dom'
 
-function Error() {
+export default function Error() {
   return (
     <Hero>
       <Banner
@@ -16,5 +16,3 @@ function Error() {
     </Hero>
   )
 }
-
-export default Error

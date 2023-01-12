@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 const StyledHeader = styled.header`
   min-height: 40vmax;
-  background: url(${props => props.img ? props.img : defaultImg}) center/cover no-repeat;
+  background-image: url(${props => props.img ? props.img : defaultImg});
 `
 
 export default function SingleRoom() {
@@ -45,7 +45,7 @@ export default function SingleRoom() {
   return (
     <>
       <StyledHeader img={mainIng || defaultImg} className="header">
-        <Banner title={`${name}`}>
+        <Banner title={name}>
           <Link to='/rooms' className='btn-primary'>
             back to rooms
           </Link>
@@ -53,9 +53,9 @@ export default function SingleRoom() {
       </StyledHeader>
       <section className='single-room'>
         <div className='single-room-images'>
-          {defaultImgs.map((item, index) => {
-            return <img key={index} src={item} alt={name}/>
-          })}
+          {
+            defaultImgs.map((item, index) => <img key={index} src={item} alt={name}/>)
+          }
         </div>
         <div className='single-room-info'>
           <article className='desc'>

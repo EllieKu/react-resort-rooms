@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 
 const RoomContext = React.createContext()
 
-class RoomProvider extends Component {
-  state = {
+function RoomProvider({children}) {
+  const [state, setState] = useState({
     rooms: [],
     sortedRooms: [],
     featuredRooms: [],
@@ -18,35 +18,35 @@ class RoomProvider extends Component {
     maxSize: 0,
     breakfast: false,
     pets: false,
-  }
+  })
 
-  componentDidMount() {
-    this.requestRooms()
-  }
-
-  requestRooms() {
-    axios.get('/.netlify/functions/rooms')
-      .then(response => {
-        let rooms = this.formatData(response.data)
-        let featuredRooms = rooms.filter(room => room.featured === true)
-        let maxPrice = Math.max(...rooms.map(item => item.price))
-        let maxSize = Math.max(...rooms.map(item => item.size))
-        this.setState({
-          rooms,
-          featuredRooms,
-          sortedRooms: rooms,
-          loading: false,
-          price: maxPrice,
-          maxPrice,
-          maxSize,
+  useEffect(() => {
+    function requestRooms() {
+      axios.get('/.netlify/functions/rooms')
+        .then(response => {
+          let rooms = formatData(response.data)
+          let featuredRooms = rooms.filter(room => room.featured === true)
+          let maxPrice = Math.max(...rooms.map(item => item.price))
+          let maxSize = Math.max(...rooms.map(item => item.size))
+          setState({
+            rooms,
+            featuredRooms,
+            sortedRooms: rooms,
+            loading: false,
+            price: maxPrice,
+            maxPrice,
+            maxSize,
+          })
         })
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
+        .catch(error => {
+          console.log(error)
+        })
+    }
 
-  formatData(items) {
+    requestRooms()
+  }, [])
+
+  function formatData(items) {
     let tempItems = items.map(item => {
       let id = item.sys.id
       let images = item.fields.images.map(image => image.fields.file.url)
@@ -57,24 +57,24 @@ class RoomProvider extends Component {
     return tempItems
   }
 
-  getRoom = slug => {
-    let tempRooms = [...this.state.rooms]
+  const getRoom = slug => {
+    let tempRooms = [...state.rooms]
     const room = tempRooms.find(room => room.slug === slug)
     return room
   }
 
-  handleChange = event => {
+  function handleChange(event) {
     const {type, name} = event.target
     const value = type === 'checkbox' ? event.target.checked : event.target.value 
     this.setState(
       {
       [name]: value
       },
-      this.filterRooms
+      filterRooms
     )
   }
 
-  filterRooms = () => {
+  const filterRooms = () => {
     let {
       rooms,
       type,
@@ -84,7 +84,7 @@ class RoomProvider extends Component {
       maxSize,
       breakfast,
       pets,
-    } = this.state
+    } = state
 
     let tempRooms = [...rooms]
     capacity = parseInt(capacity)
@@ -108,28 +108,16 @@ class RoomProvider extends Component {
     })
   }
 
-  render() {
-    return (
-      <RoomContext.Provider
-        value={{ 
-          ...this.state,
-          getRoom: this.getRoom,
-          handleChange: this.handleChange
-        }}>
-        {this.props.children}
-      </RoomContext.Provider>
-    )
-  }
+  return (
+    <RoomContext.Provider
+      value={{ 
+        ...state,
+        getRoom,
+        handleChange,
+      }}>
+      {children}
+    </RoomContext.Provider>
+  )
 }
 
-const RoomConsumer = RoomContext.Consumer
-
-export function withRoomConsumer(Component) {
-  return function ConsumerWrapper(props) {
-    return <RoomConsumer>
-      { value => <Component {...props} context={value} /> }
-    </RoomConsumer>
-  }
-}
-
-export { RoomProvider, RoomConsumer, RoomContext }
+export { RoomProvider, RoomContext }

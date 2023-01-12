@@ -2,8 +2,13 @@ import React, { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { RoomContext } from '../context'
 import Banner from '../components/Banner'
-import StyledHero from '../components/StyledHero'
 import defaultImg from '../images/room-1.jpeg'
+import styled from "styled-components";
+
+const StyledHeader = styled.header`
+  min-height: 40vmax;
+  background: url(${props => props.img ? props.img : defaultImg}) center/cover no-repeat;
+`
 
 export default function SingleRoom() {
   window.scrollTo({
@@ -39,13 +44,13 @@ export default function SingleRoom() {
   const [mainIng, ...defaultImgs] = images
   return (
     <>
-      <StyledHero img={mainIng || defaultImg}>
+      <StyledHeader img={mainIng || defaultImg} className="header">
         <Banner title={`${name}`}>
           <Link to='/rooms' className='btn-primary'>
             back to rooms
           </Link>
         </Banner>
-      </StyledHero>
+      </StyledHeader>
       <section className='single-room'>
         <div className='single-room-images'>
           {defaultImgs.map((item, index) => {

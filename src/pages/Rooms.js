@@ -1,5 +1,5 @@
 import React from 'react'
-import Hero from '../components/Hero'
+import Header from '../components/Header'
 import Banner from '../components/Banner'
 import { Link } from 'react-router-dom'
 import RoomContainer from '../components/RoomContainer'
@@ -11,13 +11,13 @@ export default function Rooms() {
 
   return (
     <>
-      <Hero hero="roomsHero">
+      <Header headerClass="roomsHeader">
         <Banner title="Our Rooms">
           <Link to="/" className="btn-primary">
             return home
           </Link>
         </Banner>
-      </Hero>
+      </Header>
       <RoomContainer />
     </>
   )

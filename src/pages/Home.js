@@ -1,5 +1,5 @@
 import React from 'react'
-import Hero from '../components/Hero'
+import Header from '../components/Header'
 import Banner from '../components/Banner'
 import Services from '../components/Services'
 import FeaturedRooms from '../components/FeaturedRooms'
@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <>
-      <Hero>
+      <Header>
         <Banner
           title="luxurious rooms"
           subtitle="deluxe rooms starting at $299">
@@ -20,7 +20,7 @@ export default function Home() {
               our rooms
             </Link>
           </Banner>
-      </Hero>
+      </Header>
       <Services />
       <FeaturedRooms />
     </>

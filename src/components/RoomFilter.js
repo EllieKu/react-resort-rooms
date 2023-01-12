@@ -86,6 +86,7 @@ export default function RoomFilter({rooms}) {
               value={minSize}
               onChange={handleChange}
               className='size-input'
+              min="0"
             />
             <input
               type="number"

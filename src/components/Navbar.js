@@ -11,11 +11,13 @@ export default function Navbar() {
       <div className="nav-center">
         <div className="nav-header">
           <Link to="/">
-            <img src={logo} alt="Beach Resout"/>
+            <img className="logo" src={logo} alt="logo" />
           </Link>
           <button
             type="button"
             className="nav-btn"
+            id="toggle-menu"
+            aria-label="toggle-menu"
             onClick={() => setIsOpen(prev => !prev)}
           >
             <FaAlignRight className="nav-icon" />

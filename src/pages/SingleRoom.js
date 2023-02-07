@@ -59,35 +59,35 @@ export default function SingleRoom() {
         </div>
         <div className='single-room-info'>
           <article className='desc'>
-            <h3>detail</h3>
+            <h1>detail</h1>
             <p>{description}</p>
           </article>
           <article className='info'>
-            <h3>info</h3>
-            <h6>
+            <h1>info</h1>
+            <div>
               <span>price:</span> 
               <span> ${price}</span>
-            </h6>
-            <h6>
+            </div>
+            <div>
               <span>size:</span> 
               <span> ${size} SQFT</span>
-            </h6>
-            <h6>
+            </div>
+            <div>
               <span>max capacity:</span> 
               <span>{capacity > 1 ? ` ${capacity} people` : ` ${capacity} person`}</span>
-            </h6>
-            <h6>
+            </div>
+            <div>
               <span>{ pets ? "pets allowed" : "no pets allowed" }</span> 
-            </h6>
-            <h6>
+            </div>
+            <div>
               <span>{ breakfast && "free breakfast included" }</span> 
-            </h6>
+            </div>
           </article>
         </div>
       </section>
       <section className='room-extras'>
         <article className='desc'>
-          <h3>Extras</h3>
+          <h1>Extras</h1>
         </article>
         <ul className='extras'>
           {extras.map((item, index) => {

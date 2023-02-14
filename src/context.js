@@ -9,6 +9,8 @@ function RoomProvider({children}) {
     sortedRooms: [],
     featuredRooms: [],
     loading: true,
+  })
+  const [condition, setCondition] = useState({
     type: 'all',
     capacity: 1,
     price: 0,
@@ -28,15 +30,19 @@ function RoomProvider({children}) {
           let featuredRooms = rooms.filter(room => room.featured === true)
           let maxPrice = Math.max(...rooms.map(item => item.price))
           let maxSize = Math.max(...rooms.map(item => item.size))
-          setState({
+          setCondition(prev => ({
+            ...prev,
+            price: maxPrice,
+            maxPrice,
+            maxSize,
+          }))
+          setState(prev => ({
+            ...prev,
             rooms,
             featuredRooms,
             sortedRooms: rooms,
             loading: false,
-            price: maxPrice,
-            maxPrice,
-            maxSize,
-          })
+          }))
         })
         .catch(error => {
           console.log(error)
@@ -46,7 +52,7 @@ function RoomProvider({children}) {
     requestRooms()
   }, [])
 
-  function formatData(items) {
+  const formatData = items => {
     let tempItems = items.map(item => {
       let id = item.sys.id
       let images = item.fields.images.map(image => image.fields.file.url)
@@ -63,55 +69,60 @@ function RoomProvider({children}) {
     return room
   }
 
-  function handleChange(event) {
+  const handleChange = event => {
     const {type, name} = event.target
     const value = type === 'checkbox' ? event.target.checked : event.target.value 
-    this.setState(
-      {
+    setCondition(prev => ({
+      ...prev,
       [name]: value
-      },
-      filterRooms
-    )
+    }))
   }
 
-  const filterRooms = () => {
-    let {
-      rooms,
-      type,
-      capacity,
-      price,
-      minSize,
-      maxSize,
-      breakfast,
-      pets,
-    } = state
+  useEffect(() => {
+    const filterRooms = () => {
+      const { rooms } = state
+      let {
+        type,
+        capacity,
+        price,
+        minSize,
+        maxSize,
+        breakfast,
+        pets,
+      } = condition
+  
+      let tempRooms = [...rooms]
+      capacity = parseInt(capacity)
+      price = parseInt(price)
+      if (type !== 'all') {
+        tempRooms = tempRooms.filter(room => room.type === type)
+      }
+      if (capacity !== 1) {
+        tempRooms = tempRooms.filter(room => room.capacity >= capacity)
+      }
+      tempRooms = tempRooms.filter(room => room.price <= price)
+      tempRooms = tempRooms.filter(room => room.size >= minSize && room.size <= maxSize)
+      if (breakfast) {
+        tempRooms = tempRooms.filter(room => room.breakfast)
+      }
+      if (pets) {
+        tempRooms = tempRooms.filter(room => room.pets)
+      }
+      setState(prev =>({
+        ...prev,
+        sortedRooms: tempRooms
+      }))
+    }
+    filterRooms()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [condition])
 
-    let tempRooms = [...rooms]
-    capacity = parseInt(capacity)
-    price = parseInt(price)
-    if (type !== 'all') {
-      tempRooms = tempRooms.filter(room => room.type === type)
-    }
-    if (capacity !== 1) {
-      tempRooms = tempRooms.filter(room => room.capacity >= capacity)
-    }
-    tempRooms = tempRooms.filter(room => room.price <= price)
-    tempRooms = tempRooms.filter(room => room.size >= minSize && room.size <= maxSize)
-    if (breakfast) {
-      tempRooms = tempRooms.filter(room => room.breakfast)
-    }
-    if (pets) {
-      tempRooms = tempRooms.filter(room => room.pets)
-    }
-    this.setState({
-      sortedRooms: tempRooms
-    })
-  }
 
   return (
     <RoomContext.Provider
       value={{ 
         ...state,
+        ...condition,
         getRoom,
         handleChange,
       }}>

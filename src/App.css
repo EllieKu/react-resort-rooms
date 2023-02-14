@@ -483,12 +483,10 @@ h6 {
   grid-row-gap: 2rem;
   grid-column-gap: 40px;
 }
-.form-group {
-  text-transform: capitalize;
-}
 .form-group label {
   display: block;
   letter-spacing: var(--mainSpacing);
+  text-transform: capitalize;
   margin-bottom: 0.5rem;
 }
 .form-control {

@@ -33,7 +33,7 @@ export default function RoomFilter({rooms}) {
       <Title title="search rooms" />
       <form className='filter-form'>
         {/* select type */}
-        <div className='form-group'>
+        <div>
           <label htmlFor="type">room type</label>
           <select
             name="type"
@@ -47,7 +47,7 @@ export default function RoomFilter({rooms}) {
         </div>
         {/* end select type */}
         {/* select guest */}
-        <div className='form-group'>
+        <div>
           <label htmlFor="capacity">Guests</label>
           <select
             name="capacity"
@@ -61,7 +61,7 @@ export default function RoomFilter({rooms}) {
         </div>
         {/* end select guest */}
         {/* price */}
-        <div className='form-group'>
+        <div>
           <label htmlFor="price">room price ${price}</label>
           <input
             type="range"
@@ -76,7 +76,7 @@ export default function RoomFilter({rooms}) {
         </div>
         {/* end price */}
         {/* size */}
-        <div className='form-group'>
+        <div>
           <label htmlFor="size">room size</label>
           <div className='size-inputs'>
             <input
@@ -100,7 +100,7 @@ export default function RoomFilter({rooms}) {
         </div>
         {/* end size */}
         {/* extras */}
-        <div className='form-group'>
+        <div>
           <div className='single-extra'>
             <input
               type='checkbox'

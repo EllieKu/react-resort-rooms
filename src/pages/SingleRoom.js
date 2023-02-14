@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { RoomContext } from '../context'
+import Navbar from '../components/Navbar'
 import Banner from '../components/Banner'
 import defaultImg from '../images/room-1.jpeg'
 import styled from "styled-components";
@@ -44,6 +45,7 @@ export default function SingleRoom() {
   const [mainIng, ...defaultImgs] = images
   return (
     <>
+      <Navbar />
       <StyledHeader img={mainIng || defaultImg} className="header">
         <Banner title={name}>
           <Link to='/rooms' className='btn-primary'>

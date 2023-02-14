@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import Navbar from '../components/Navbar'
 import Header from '../components/Header'
 import Banner from '../components/Banner'
 import RoomFilter from '../components/RoomFilter'
@@ -28,6 +29,7 @@ export default function Rooms() {
 
   return (
     <>
+      <Navbar />
       <Header headerClass="roomsHeader">
         <Banner title="Our Rooms">
           <Link to="/" className="btn-primary">

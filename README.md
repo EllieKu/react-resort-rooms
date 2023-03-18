@@ -13,6 +13,9 @@
 
 ### Installation
 
+    npm install netlify-cli -g
+and
+
     npm install
 
 ### Available Scripts
